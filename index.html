@@ -1,13 +1,13 @@
 <!-- =========================================================
    Global Concepts Media
    File: index.html
-   Version: 2.1.1
+   Version: 2.1.2
    Status: Production Road-Test Candidate
-   Source: index.html 2.1.0
-   Sprint: Public Website — Clickable Snapshot Preview
-   Purpose: Preserve the complete production homepage and make the
-            Business Snapshot™ preview card fully interactive while
-            retaining all existing CTA links and production behavior.
+   Source: index.html 2.1.1
+   Sprint: Public Website — Remove Internal OS Entrance
+   Purpose: Preserve the complete production homepage and all public
+            Business Snapshot™ lead-generation links while removing the
+            public Mission Control entrance to the internal GCM OS.
    ========================================================= -->
 <!doctype html>
 <html lang="en">
@@ -99,42 +99,6 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div id="site-header"></div>
-
-  <!-- Internal GCM OS access -->
-  <div
-    style="
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 999;
-    "
-  >
-    <a
-      href="https://globalconceptsmediallc-oss.github.io/gcm-operating-system-app/today.html"
-      rel="nofollow"
-      style="
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 38px;
-        padding: 0 13px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 999px;
-        background: rgba(8, 22, 40, 0.88);
-        color: rgba(255, 255, 255, 0.78);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        text-decoration: none;
-      "
-      aria-label="Open GCM OS Mission Control"
-    >
-      Mission Control
-    </a>
-  </div>
 
   <main id="main">
 
