@@ -1,19 +1,27 @@
-/* Global Concepts Media — shared UI + cache-busting */
+/* =========================================================
+   Global Concepts Media — Shared Site Foundation
+   File: shared.js
+   Version: 2.0.0
+   Updated: 2026-08-12
+   Purpose: Shared header, navigation, footer, and utilities.
+   ========================================================= */
 (() => {
-  const VERSION = "20260629";
+  const VERSION = "20260812-1";
 
-  const IS_GITHUB_PAGES =
-    window.location.hostname.includes("github.io");
+  const IS_GITHUB_PAGES = window.location.hostname.endsWith(".github.io");
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
 
-  const BASE = IS_GITHUB_PAGES ? "/globalconceptsmedia" : "";
+  // On GitHub Pages, derive the repository path instead of hard-coding it.
+  // The custom domain remains rooted at /, while previews survive repo renames.
+  const BASE = IS_GITHUB_PAGES && pathParts.length ? `/${pathParts[0]}` : "";
 
-const navItems = [
-  { href: `${BASE}/industries`, label: "Industries" },
-  { href: `${BASE}/google-ads`, label: "Google Ads" },
-  { href: `${BASE}/seo`, label: "SEO" },
-  { href: `${BASE}/case-studies`, label: "Case Studies" },
-  { href: `${BASE}/contact`, label: "Contact" }
-];
+  const navItems = [
+    { href: `${BASE}/industries`, label: "Industries" },
+    { href: `${BASE}/google-ads`, label: "Google Ads" },
+    { href: `${BASE}/seo`, label: "SEO" },
+    { href: `${BASE}/case-studies`, label: "Case Studies" },
+    { href: `${BASE}/contact`, label: "Contact" }
+  ];
 
   function withV(url) {
     if (!url || url.startsWith("http")) return url;
@@ -40,12 +48,12 @@ const navItems = [
 
     const current = window.location.pathname || "/";
     const homeHref = `${BASE}/`;
-   const growthReviewHref = `${BASE}/growth-review`;
+    const growthReviewHref = `${BASE}/growth-review`;
     const logoSrc = `${BASE}/images/logo.jpg`;
 
     const links = navItems.map((item) => {
-      const active = samePath(current, item.href) ? "active" : "";
-      return `<a class="${active}" href="${item.href}">${item.label}</a>`;
+      const isActive = samePath(current, item.href);
+      return `<a class="${isActive ? "active" : ""}" href="${item.href}"${isActive ? ' aria-current="page"' : ""}>${item.label}</a>`;
     }).join("");
 
     const homeActive =
@@ -66,15 +74,15 @@ const navItems = [
           </a>
 
           <nav class="navlinks" aria-label="Primary navigation">
-            <a class="${homeActive ? "active" : ""}" href="${homeHref}">Home</a>
+            <a class="${homeActive ? "active" : ""}" href="${homeHref}"${homeActive ? ' aria-current="page"' : ""}>Home</a>
             ${links}
           </nav>
 
-  <div class="nav-cta">
-  <a class="btn btn-primary" href="${growthReviewHref}">
-    Schedule a Growth Review
-  </a>
-</div>
+          <div class="nav-cta">
+            <a class="btn btn-primary" href="${growthReviewHref}">
+              Schedule a Growth Review
+            </a>
+          </div>
         </div>
       </header>
     `;
@@ -101,14 +109,16 @@ const navItems = [
             <div class="copy">© ${year} Global Concepts Media. All rights reserved.</div>
           </div>
 
-         <div class="footer-links" aria-label="Footer navigation">
-  <a href="${BASE}/google-ads">Google Ads</a>
-  <a href="${BASE}/seo">SEO</a>
-  <a href="${BASE}/case-studies">Case Studies</a>
-  <a href="${BASE}/contact">Contact</a>
-  <a href="${BASE}/privacy">Privacy Policy</a>
-  <a href="${BASE}/industries">Industries</a>
-</div>
+          <div class="footer-links" aria-label="Footer navigation">
+            <a href="${BASE}/industries">Industries</a>
+            <a href="${BASE}/google-ads">Google Ads</a>
+            <a href="${BASE}/seo">SEO</a>
+            <a href="${BASE}/case-studies">Case Studies</a>
+            <a href="${BASE}/growth-review">Growth Review</a>
+            <a href="${BASE}/sales-presentation">Sales Presentation</a>
+            <a href="${BASE}/contact">Contact</a>
+            <a href="${BASE}/privacy">Privacy Policy</a>
+          </div>
         </div>
       </footer>
     `;
