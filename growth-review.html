@@ -1,259 +1,626 @@
+<!-- =========================================================
+   Global Concepts Media
+   File: growth-review.html
+   Version: 1.1.0
+   Updated: 2026-09-14
+   Status: Production Road-Test Candidate
+   Sprint: Core Web Vitals — Growth Review Test
+   Purpose:
+     Preserve the existing 90-Day Growth Review page while
+     reducing LCP and Total Blocking Time.
+
+   Performance changes:
+     1. Removed render-blocking external styles.css from this page.
+     2. Inlined only the CSS required by this page.
+     3. Removed unused shared.js from this page.
+     4. Delayed Google Analytics until first interaction or
+        7 seconds after window load.
+     5. Added connection hints for Google Analytics origins.
+     6. Preserved GA4 measurement ID G-0SN72D1GNG.
+     7. Preserved existing form fields, content, layout, and
+        website-query prefill behavior.
+
+   Baseline before deployment:
+     LCP: 4.24s
+     TBT: 624ms
+     CLS: 0.000
+
+   Fix → Build → Deploy → Test
+   ========================================================= -->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
 
   <meta
     name="description"
     content="Request a consultant-reviewed 90-Day Growth Review from Global Concepts Media. Get a prioritized growth roadmap based on observable evidence for $299."
   />
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SN72D1GNG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0SN72D1GNG', { anonymize_ip: true });
-  </script>
+  <title>
+    90-Day Growth Review — $299 | Global Concepts Media
+  </title>
 
-  <title>90-Day Growth Review — $299 | Global Concepts Media</title>
-<link rel="canonical" href="https://globalconceptsmedia.com/growth-review" />
-  <link rel="icon" href="./images/logo.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=20260812-1" />
-  <script defer src="./shared.js?v=20260812-1"></script>
+  <link
+    rel="canonical"
+    href="https://globalconceptsmedia.com/growth-review"
+  />
+
+  <link
+    rel="icon"
+    href="./images/logo.jpg"
+  />
+
+  <!--
+    Connection hints only.
+    The Google Analytics JavaScript itself is intentionally delayed
+    so third-party code does not compete with initial rendering.
+  -->
+  <link
+    rel="preconnect"
+    href="https://www.googletagmanager.com"
+    crossorigin
+  />
+
+  <link
+    rel="preconnect"
+    href="https://www.google-analytics.com"
+    crossorigin
+  />
+
+  <link
+    rel="dns-prefetch"
+    href="//www.googletagmanager.com"
+  />
+
+  <link
+    rel="dns-prefetch"
+    href="//www.google-analytics.com"
+  />
 
   <style>
-    body{
+    /* =========================================================
+       GCM Growth Review — Critical / Complete Page CSS
+       Version: 1.1.0
+
+       This page is intentionally self-contained so the browser
+       does not need styles.css before painting the page.
+       ========================================================= */
+
+    :root {
+      --brand1: #7c3aed;
+      --brand2: #06b6d4;
+      --brand3: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+
+      color: #0f172a;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      line-height: 1.6;
+
       background:
-        radial-gradient(circle at top left, rgba(6,182,212,.13), transparent 32%),
-        radial-gradient(circle at top right, rgba(124,58,237,.11), transparent 42%),
-        linear-gradient(135deg,#f8fbff,#ffffff);
-      color:#0f172a;
+        radial-gradient(
+          circle at top left,
+          rgba(6, 182, 212, 0.13),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at top right,
+          rgba(124, 58, 237, 0.11),
+          transparent 42%
+        ),
+        linear-gradient(
+          135deg,
+          #f8fbff,
+          #ffffff
+        );
+
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      overflow-x: hidden;
     }
 
-    .growth-wrap{
-      min-height:100vh;
-      padding:92px 0 78px;
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
     }
 
-    .growth-grid{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:48px;
-      align-items:start;
+    p {
+      margin: 0 0 14px;
     }
 
-    .growth-copy h1{
-      color:#0f172a;
-      font-size:clamp(2.6rem,5.2vw,5rem);
-      line-height:.95;
-      letter-spacing:-.065em;
-      margin:0 0 24px;
-      max-width:760px;
+    ::selection {
+      background: rgba(6, 182, 212, 0.30);
     }
 
-    .growth-copy p{
-      color:#334155;
-      font-size:clamp(1.08rem,1.45vw,1.2rem);
-      max-width:700px;
+    :focus-visible {
+      outline: 3px solid rgba(6, 182, 212, 0.62);
+      outline-offset: 4px;
+      border-radius: 10px;
     }
 
-    .price-line{
-      display:flex;
-      align-items:baseline;
-      gap:12px;
-      margin:24px 0 8px;
+    .container {
+      width: min(
+        1140px,
+        calc(100% - 40px)
+      );
+
+      margin-inline: auto;
     }
 
-    .price{
-      color:#0f172a;
-      font-size:clamp(2.4rem,4vw,4rem);
-      font-weight:950;
-      letter-spacing:-.055em;
-      line-height:1;
+    /* ---------------------------------------------------------
+       Eyebrow
+       --------------------------------------------------------- */
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 15px;
+
+      padding: 7px 12px;
+
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.085),
+          rgba(255, 255, 255, 0.038)
+        );
+
+      color: rgba(238, 244, 255, 0.90);
+
+      font-size: 0.85rem;
+      font-weight: 850;
+      letter-spacing: 0.025em;
     }
 
-    .price-note{
-      color:#64748b;
-      font-weight:800;
+    .eyebrow::before {
+      content: "";
+
+      width: 8px;
+      height: 8px;
+
+      flex: 0 0 auto;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--brand2),
+          var(--brand3)
+        );
+
+      box-shadow:
+        0 0 18px rgba(6, 182, 212, 0.78);
     }
 
-    .growth-list{
-      margin:26px 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:13px;
-      color:#475569;
-      font-weight:750;
+    /* ---------------------------------------------------------
+       Main page layout
+       --------------------------------------------------------- */
+
+    .growth-wrap {
+      min-height: 100vh;
+      padding: 92px 0 78px;
     }
 
-    .growth-list li{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
+    .growth-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.05fr
+        0.95fr;
+
+      gap: 48px;
+
+      align-items: start;
     }
 
-    .growth-list li:before{
-      content:"";
-      flex:0 0 auto;
-      width:9px;
-      height:9px;
-      margin-top:8px;
-      border-radius:50%;
-      background:#06b6d4;
-      box-shadow:0 0 16px rgba(6,182,212,.55);
+    /* ---------------------------------------------------------
+       Left column
+       --------------------------------------------------------- */
+
+    .growth-copy h1 {
+      max-width: 760px;
+
+      margin: 0 0 24px;
+
+      color: #0f172a;
+
+      font-size:
+        clamp(
+          2.6rem,
+          5.2vw,
+          5rem
+        );
+
+      line-height: 0.95;
+      letter-spacing: -0.065em;
     }
 
-    .growth-proof{
-      margin-top:28px;
-      padding:20px;
-      border:1px solid rgba(15,23,42,.10);
-      border-radius:20px;
-      background:rgba(255,255,255,.72);
-      box-shadow:0 16px 40px rgba(15,23,42,.08);
+    .growth-copy p {
+      max-width: 700px;
+
+      color: #334155;
+
+      font-size:
+        clamp(
+          1.08rem,
+          1.45vw,
+          1.2rem
+        );
     }
 
-    .growth-proof strong{
-      display:block;
-      color:#0f172a;
-      margin-bottom:6px;
+    .price-line {
+      display: flex;
+      align-items: baseline;
+
+      gap: 12px;
+
+      margin: 24px 0 8px;
     }
 
-    .growth-proof p{
-      margin:0;
-      font-size:1rem;
-      color:#475569;
+    .price {
+      color: #0f172a;
+
+      font-size:
+        clamp(
+          2.4rem,
+          4vw,
+          4rem
+        );
+
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      line-height: 1;
     }
 
-    .growth-card{
-      background:#ffffff;
-      border:1px solid rgba(15,23,42,.14);
-      border-radius:30px;
-      padding:34px;
-      box-shadow:0 26px 80px rgba(15,23,42,.14);
-      color:#0f172a;
+    .price-note {
+      color: #64748b;
+      font-weight: 800;
     }
 
-    .growth-card h2{
-      color:#0f172a;
-      margin:0 0 12px;
-      font-size:2rem;
-      line-height:1.05;
-      letter-spacing:-.035em;
+    .growth-list {
+      display: grid;
+      gap: 13px;
+
+      margin: 26px 0 0;
+      padding: 0;
+
+      list-style: none;
+
+      color: #475569;
+      font-weight: 750;
     }
 
-    .growth-card p{
-      color:#475569;
-      margin:0 0 20px;
+    .growth-list li {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 10px;
     }
 
-    .growth-form{
-      display:grid;
-      gap:16px;
+    .growth-list li::before {
+      content: "";
+
+      width: 9px;
+      height: 9px;
+
+      flex: 0 0 auto;
+
+      margin-top: 8px;
+
+      border-radius: 50%;
+
+      background: #06b6d4;
+
+      box-shadow:
+        0 0 16px rgba(6, 182, 212, 0.55);
     }
 
-    .growth-form label{
-      display:block;
-      color:#334155;
-      font-weight:900;
+    .growth-proof {
+      margin-top: 28px;
+
+      padding: 20px;
+
+      border:
+        1px solid
+        rgba(15, 23, 42, 0.10);
+
+      border-radius: 20px;
+
+      background:
+        rgba(255, 255, 255, 0.72);
+
+      box-shadow:
+        0 16px 40px
+        rgba(15, 23, 42, 0.08);
     }
 
-    .growth-form label > span{
-      display:block;
-      margin-bottom:7px;
-      color:#334155;
+    .growth-proof strong {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: #0f172a;
     }
 
-    .optional{
-      display:inline;
-      color:#64748b;
-      font-weight:700;
+    .growth-proof p {
+      margin: 0;
+
+      color: #475569;
+
+      font-size: 1rem;
+    }
+
+    /* ---------------------------------------------------------
+       Form card
+       --------------------------------------------------------- */
+
+    .growth-card {
+      padding: 34px;
+
+      color: #0f172a;
+
+      background: #ffffff;
+
+      border:
+        1px solid
+        rgba(15, 23, 42, 0.14);
+
+      border-radius: 30px;
+
+      box-shadow:
+        0 26px 80px
+        rgba(15, 23, 42, 0.14);
+    }
+
+    .growth-card h2 {
+      margin: 0 0 12px;
+
+      color: #0f172a;
+
+      font-size: 2rem;
+
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .growth-card p {
+      margin: 0 0 20px;
+
+      color: #475569;
+    }
+
+    /* ---------------------------------------------------------
+       Form
+       --------------------------------------------------------- */
+
+    .growth-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .growth-form label {
+      display: block;
+
+      color: #334155;
+
+      font-weight: 900;
+    }
+
+    .growth-form label > span {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #334155;
+    }
+
+    .optional {
+      display: inline;
+
+      color: #64748b;
+
+      font-weight: 700;
     }
 
     .growth-form input,
     .growth-form textarea,
-    .growth-form select{
-      width:100%;
-      background:#ffffff;
-      color:#0f172a;
-      border:1px solid rgba(15,23,42,.22);
-      border-radius:16px;
-      padding:14px 15px;
-      outline:none;
+    .growth-form select {
+      width: 100%;
+
+      padding: 14px 15px;
+
+      color: #0f172a;
+
+      background: #ffffff;
+
+      border:
+        1px solid
+        rgba(15, 23, 42, 0.22);
+
+      border-radius: 16px;
+
+      outline: none;
     }
 
     .growth-form input::placeholder,
-    .growth-form textarea::placeholder{
-      color:#64748b;
-      opacity:1;
+    .growth-form textarea::placeholder {
+      color: #64748b;
+      opacity: 1;
     }
 
     .growth-form input:focus,
     .growth-form textarea:focus,
-    .growth-form select:focus{
-      border-color:#06b6d4;
-      box-shadow:0 0 0 4px rgba(6,182,212,.18);
+    .growth-form select:focus {
+      border-color: #06b6d4;
+
+      box-shadow:
+        0 0 0 4px
+        rgba(6, 182, 212, 0.18);
     }
 
-    .growth-form textarea{
-      min-height:132px;
-      resize:vertical;
+    .growth-form textarea {
+      min-height: 132px;
+
+      resize: vertical;
     }
 
-    .growth-form button{
-      width:100%;
-      min-height:52px;
-      border:0;
-      border-radius:16px;
-      background:linear-gradient(135deg,#7c3aed,#06b6d4);
-      color:#ffffff;
-      font-weight:950;
-      cursor:pointer;
-      box-shadow:0 18px 42px rgba(6,182,212,.22);
-      transition:transform .16s ease, box-shadow .16s ease;
+    .growth-form button {
+      width: 100%;
+      min-height: 52px;
+
+      border: 0;
+      border-radius: 16px;
+
+      color: #ffffff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #06b6d4
+        );
+
+      font-weight: 950;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 18px 42px
+        rgba(6, 182, 212, 0.22);
+
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease;
     }
 
-    .growth-form button:hover{
-      transform:translateY(-2px);
-      box-shadow:0 24px 58px rgba(6,182,212,.28);
+    .growth-form button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 24px 58px
+        rgba(6, 182, 212, 0.28);
     }
 
-    .form-note{
-      margin:0;
-      color:#64748b;
-      font-size:.92rem;
-      line-height:1.5;
+    .form-note {
+      margin: 0;
+
+      color: #64748b;
+
+      font-size: 0.92rem;
+
+      line-height: 1.5;
     }
 
-    @media(max-width:900px){
-      .growth-wrap{
-        padding:58px 0;
+    /* ---------------------------------------------------------
+       Responsive
+       --------------------------------------------------------- */
+
+    @media (max-width: 900px) {
+      .growth-wrap {
+        padding: 58px 0;
       }
 
-      .growth-grid{
-        grid-template-columns:1fr;
-        gap:28px;
+      .growth-grid {
+        grid-template-columns: 1fr;
+
+        gap: 28px;
       }
     }
 
-    @media(max-width:680px){
-      .growth-card{
-        padding:22px;
-        border-radius:24px;
+    @media (max-width: 680px) {
+      .growth-card {
+        padding: 22px;
+
+        border-radius: 24px;
       }
     }
   </style>
+
+  <!-- =======================================================
+       GA4 lightweight bootstrap
+
+       Important:
+       These calls only populate dataLayer. They do NOT download
+       Google's external JavaScript yet.
+       ======================================================= -->
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag(
+      "config",
+      "G-0SN72D1GNG",
+      {
+        anonymize_ip: true
+      }
+    );
+  </script>
 </head>
 
 <body>
   <main class="growth-wrap">
     <div class="container growth-grid">
-      <section class="growth-copy">
-        <div class="eyebrow">90-Day Growth Review™</div>
 
-        <h1>Turn your Snapshot into a clear growth plan.</h1>
+      <!-- =====================================================
+           Growth Review offer
+           ===================================================== -->
+
+      <section class="growth-copy">
+
+        <div class="eyebrow">
+          90-Day Growth Review™
+        </div>
+
+        <h1>
+          Turn your Snapshot into a clear growth plan.
+        </h1>
 
         <p>
           Your free Business Snapshot identifies the first visible opportunity.
@@ -262,21 +629,46 @@
         </p>
 
         <div class="price-line">
-          <span class="price">$299</span>
-          <span class="price-note">one-time review</span>
+          <span class="price">
+            $299
+          </span>
+
+          <span class="price-note">
+            one-time review
+          </span>
         </div>
 
         <ul class="growth-list">
-          <li>Executive summary of your strongest and weakest growth areas</li>
-          <li>Review of the five questions customers ask before they buy</li>
-          <li>Prioritized recommendations ranked by impact, urgency, and effort</li>
-          <li>90-day action plan for Days 1–30, 31–60, and 61–90</li>
-          <li>Measurement plan tied to leads, calls, conversions, visibility, or revenue</li>
-          <li>Implementation options for your team, GCM support, or managed execution</li>
+          <li>
+            Executive summary of your strongest and weakest growth areas
+          </li>
+
+          <li>
+            Review of the five questions customers ask before they buy
+          </li>
+
+          <li>
+            Prioritized recommendations ranked by impact, urgency, and effort
+          </li>
+
+          <li>
+            90-day action plan for Days 1–30, 31–60, and 61–90
+          </li>
+
+          <li>
+            Measurement plan tied to leads, calls, conversions, visibility, or revenue
+          </li>
+
+          <li>
+            Implementation options for your team, GCM support, or managed execution
+          </li>
         </ul>
 
         <div class="growth-proof">
-          <strong>Evidence before assumptions.</strong>
+          <strong>
+            Evidence before assumptions.
+          </strong>
+
           <p>
             Every recommendation must connect to an observable business issue,
             expected business impact, and a measurable result.
@@ -284,8 +676,18 @@
         </div>
       </section>
 
-      <section class="growth-card" aria-label="90-Day Growth Review request form">
-        <h2>Request Your 90-Day Growth Review</h2>
+      <!-- =====================================================
+           Growth Review request form
+           ===================================================== -->
+
+      <section
+        class="growth-card"
+        aria-label="90-Day Growth Review request form"
+      >
+
+        <h2>
+          Request Your 90-Day Growth Review
+        </h2>
 
         <p>
           Submit your details below. We will review the request and contact you
@@ -299,9 +701,24 @@
           data-netlify="true"
           netlify-honeypot="bot-field"
         >
-          <input type="hidden" name="form-name" value="growth-review" />
-          <input type="hidden" name="product" value="90-Day Growth Review" />
-          <input type="hidden" name="price" value="$299" />
+
+          <input
+            type="hidden"
+            name="form-name"
+            value="growth-review"
+          />
+
+          <input
+            type="hidden"
+            name="product"
+            value="90-Day Growth Review"
+          />
+
+          <input
+            type="hidden"
+            name="price"
+            value="$299"
+          />
 
           <p hidden>
             <label>
@@ -311,17 +728,36 @@
           </p>
 
           <label>
-            <span>Name</span>
-            <input type="text" name="name" autocomplete="name" required />
+            <span>
+              Name
+            </span>
+
+            <input
+              type="text"
+              name="name"
+              autocomplete="name"
+              required
+            />
           </label>
 
           <label>
-            <span>Email</span>
-            <input type="email" name="email" autocomplete="email" required />
+            <span>
+              Email
+            </span>
+
+            <input
+              type="email"
+              name="email"
+              autocomplete="email"
+              required
+            />
           </label>
 
           <label>
-            <span>Business Name</span>
+            <span>
+              Business Name
+            </span>
+
             <input
               type="text"
               name="business-name"
@@ -331,7 +767,10 @@
           </label>
 
           <label>
-            <span>Website</span>
+            <span>
+              Website
+            </span>
+
             <input
               type="url"
               name="website"
@@ -343,7 +782,10 @@
           </label>
 
           <label>
-            <span>What is the main result you want in the next 90 days?</span>
+            <span>
+              What is the main result you want in the next 90 days?
+            </span>
+
             <textarea
               name="growth-goal"
               placeholder="More qualified leads, stronger local visibility, better conversion, clearer tracking, or another measurable business result."
@@ -352,7 +794,13 @@
           </label>
 
           <label>
-            <span>Anything else we should know? <span class="optional">Optional</span></span>
+            <span>
+              Anything else we should know?
+              <span class="optional">
+                Optional
+              </span>
+            </span>
+
             <textarea
               name="additional-context"
               placeholder="Share any current concerns, campaigns, recent changes, or constraints."
@@ -373,13 +821,140 @@
   </main>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const websiteField = document.getElementById("website");
-    const websiteFromQuery = params.get("website");
+    /* =========================================================
+       Website field prefill
+       Preserves existing behavior:
+       /growth-review?website=https://example.com
+       ========================================================= */
 
-    if (websiteFromQuery && websiteField) {
-      websiteField.value = websiteFromQuery;
-    }
+    (function () {
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const websiteField =
+        document.getElementById(
+          "website"
+        );
+
+      const websiteFromQuery =
+        params.get(
+          "website"
+        );
+
+      if (
+        websiteFromQuery &&
+        websiteField
+      ) {
+        websiteField.value =
+          websiteFromQuery;
+      }
+    })();
+
+
+    /* =========================================================
+       Deferred GA4 loader
+       Version: 1.1.0
+
+       Goal:
+       Keep Google's third-party JavaScript outside the critical
+       rendering and initial-interactivity window.
+
+       GA loads:
+         - immediately after meaningful user interaction, OR
+         - automatically 7 seconds after window load.
+
+       The dataLayer/config calls above remain queued until the
+       external gtag.js library arrives.
+       ========================================================= */
+
+    (function () {
+      "use strict";
+
+      const GA_MEASUREMENT_ID =
+        "G-0SN72D1GNG";
+
+      const ANALYTICS_DELAY_MS =
+        7000;
+
+      let analyticsLoaded =
+        false;
+
+      function loadAnalytics() {
+        if (analyticsLoaded) {
+          return;
+        }
+
+        analyticsLoaded =
+          true;
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        script.async =
+          true;
+
+        script.src =
+          "https://www.googletagmanager.com/gtag/js?id=" +
+          encodeURIComponent(
+            GA_MEASUREMENT_ID
+          );
+
+        document.head.appendChild(
+          script
+        );
+
+        removeInteractionListeners();
+      }
+
+      const interactionEvents = [
+        "pointerdown",
+        "keydown",
+        "touchstart",
+        "scroll"
+      ];
+
+      function removeInteractionListeners() {
+        interactionEvents.forEach(
+          function (eventName) {
+            window.removeEventListener(
+              eventName,
+              loadAnalytics,
+              false
+            );
+          }
+        );
+      }
+
+      interactionEvents.forEach(
+        function (eventName) {
+          window.addEventListener(
+            eventName,
+            loadAnalytics,
+            {
+              once: true,
+              passive: true
+            }
+          );
+        }
+      );
+
+      window.addEventListener(
+        "load",
+        function () {
+          window.setTimeout(
+            loadAnalytics,
+            ANALYTICS_DELAY_MS
+          );
+        },
+        {
+          once: true
+        }
+      );
+    })();
   </script>
 </body>
 </html>
