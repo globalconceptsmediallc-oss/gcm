@@ -1,25 +1,82 @@
+<!-- =========================================================
+   Global Concepts Media
+   File: contact.html
+   Version: 1.0.0
+   Updated: 2026-09-14
+   Status: Production Road-Test Candidate
+   Sprint: Core Web Vitals — Contact GA4 Migration
+   Purpose:
+     Preserve the complete production Contact page while
+     migrating analytics to the clean GCM GA4 property and
+     keeping Google Analytics outside the critical rendering
+     window.
+
+   Performance changes:
+     1. Removed immediate external GA4 JavaScript from the head.
+     2. Migrated GA4 from G-0SN72D1GNG to G-SS32Y6EEDM.
+     3. Delayed Google Analytics until first interaction or
+        7 seconds after window load.
+     4. Added connection hints for Google Analytics origins.
+     5. Preserved styles.css.
+     6. Preserved shared.js for header, footer, and contact form.
+     7. Preserved Cloudflare Insights.
+     8. Preserved all page content and contact functionality.
+
+   Baseline before deployment:
+     TBT: approximately 650ms
+
+   Fix → Build → Deploy → Test
+   ========================================================= -->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Contact Global Concepts Media to schedule a Growth Review, ask about SEO, Google Ads, analytics, website strategy, or lead generation support." />
-
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SN72D1GNG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0SN72D1GNG', { anonymize_ip: true });
-  </script>
+  <meta
+    name="description"
+    content="Contact Global Concepts Media to schedule a Growth Review, ask about SEO, Google Ads, analytics, website strategy, or lead generation support."
+  />
 
   <title>Contact | Global Concepts Media</title>
-  <link rel="canonical" href="https://globalconceptsmedia.com/contact" />
+
+  <link
+    rel="canonical"
+    href="https://globalconceptsmedia.com/contact"
+  />
 
   <link rel="icon" href="./images/logo.jpg" />
- <link rel="stylesheet" href="./styles.css?v=20260812-1" />
-<script defer src="./shared.js?v=20260812-1"></script>
+
+  <!--
+    Connection hints only.
+    Google Analytics JavaScript is intentionally delayed.
+  -->
+  <link
+    rel="preconnect"
+    href="https://www.googletagmanager.com"
+    crossorigin
+  />
+
+  <link
+    rel="preconnect"
+    href="https://www.google-analytics.com"
+    crossorigin
+  />
+
+  <link
+    rel="dns-prefetch"
+    href="//www.googletagmanager.com"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./styles.css?v=20260812-1"
+  />
+
+  <script
+    defer
+    src="./shared.js?v=20260812-1"
+  ></script>
 
   <style>
     .contact-page{
@@ -337,6 +394,28 @@
       }
     }
   </style>
+
+  <!-- =======================================================
+       GA4 lightweight bootstrap
+       ======================================================= -->
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag(
+      "config",
+      "G-SS32Y6EEDM",
+      {
+        anonymize_ip: true
+      }
+    );
+  </script>
 </head>
 
 <body>
@@ -351,32 +430,50 @@
         <div>
           <p class="eyebrow">Contact Global Concepts Media</p>
           <h1>Let’s find what is holding back your growth.</h1>
+
           <p class="subhead">
-            Whether you need a Growth Review, better tracking, stronger SEO, cleaner Google Ads, or a higher-converting website, start here.
+            Whether you need a Growth Review, better tracking, stronger SEO,
+            cleaner Google Ads, or a higher-converting website, start here.
           </p>
 
           <div class="contact-actions">
-            <a class="btn btn-primary" href="#contact-form">Send a Message</a>
-            <a class="btn btn-ghost" href="growth-review.html">Schedule a Growth Review</a>
+            <a class="btn btn-primary" href="#contact-form">
+              Send a Message
+            </a>
+
+            <a class="btn btn-ghost" href="growth-review.html">
+              Schedule a Growth Review
+            </a>
           </div>
 
-          <p class="contact-note"><span>✓</span> Clear direction first. No vague marketing conversation.</p>
+          <p class="contact-note">
+            <span>✓</span>
+            Clear direction first. No vague marketing conversation.
+          </p>
         </div>
 
         <aside class="contact-card">
           <h2>Best way to start</h2>
+
           <p>
-            Tell us what feels unclear: leads, ads, SEO, tracking, traffic, reporting, or website conversions.
+            Tell us what feels unclear: leads, ads, SEO, tracking, traffic,
+            reporting, or website conversions.
           </p>
 
           <div class="contact-method">
             <strong>Email</strong>
-            <a href="mailto:globalconceptsmediallc@gmail.com">globalconceptsmediallc@gmail.com</a>
+
+            <a href="mailto:globalconceptsmediallc@gmail.com">
+              globalconceptsmediallc@gmail.com
+            </a>
           </div>
 
           <div class="contact-method">
             <strong>Primary Next Step</strong>
-            <a href="growth-review.html">Book a Growth Review</a>
+
+            <a href="growth-review.html">
+              Book a Growth Review
+            </a>
           </div>
         </aside>
       </div>
@@ -384,137 +481,213 @@
 
     <section class="contact-section alt">
       <div class="container">
+
         <div class="contact-head">
           <h2>Choose the right starting point.</h2>
+
           <p>
-            Different problems need different conversations. Pick the path that best matches where you are right now.
+            Different problems need different conversations. Pick the path
+            that best matches where you are right now.
           </p>
         </div>
 
         <div class="contact-cards">
+
           <article class="contact-box">
             <strong>Option 01</strong>
             <h3>Growth Review</h3>
+
             <p>
-              Best if you are not sure where the leak is and want a full look at website, SEO, ads, tracking, and lead flow.
+              Best if you are not sure where the leak is and want a full look
+              at website, SEO, ads, tracking, and lead flow.
             </p>
-            <a class="btn btn-primary" href="growth-review.html">Schedule Review</a>
+
+            <a class="btn btn-primary" href="growth-review.html">
+              Schedule Review
+            </a>
           </article>
 
           <article class="contact-box">
             <strong>Option 02</strong>
             <h3>Project Inquiry</h3>
+
             <p>
-              Best if you already know you need help with SEO, Google Ads, analytics, reporting, or a website rebuild.
+              Best if you already know you need help with SEO, Google Ads,
+              analytics, reporting, or a website rebuild.
             </p>
-            <a class="btn btn-secondary" href="#contact-form">Start Inquiry</a>
+
+            <a class="btn btn-secondary" href="#contact-form">
+              Start Inquiry
+            </a>
           </article>
 
           <article class="contact-box">
             <strong>Option 03</strong>
             <h3>Existing Client</h3>
+
             <p>
-              Best if you need to send updates, ask a question, share access, or follow up on current work.
+              Best if you need to send updates, ask a question, share access,
+              or follow up on current work.
             </p>
-            <a class="btn btn-secondary" href="mailto:globalconceptsmediallc@gmail.com">Email Us</a>
+
+            <a
+              class="btn btn-secondary"
+              href="mailto:globalconceptsmediallc@gmail.com"
+            >
+              Email Us
+            </a>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="contact-section">
       <div class="container">
+
         <div class="contact-head">
           <h2>Common reasons people contact us.</h2>
+
           <p>
-            Most business owners do not need more noise. They need to know what to fix first.
+            Most business owners do not need more noise. They need to know
+            what to fix first.
           </p>
         </div>
 
         <div class="contact-cards">
+
           <article class="contact-box">
             <strong>Leads</strong>
             <h3>Traffic is not converting.</h3>
-            <p>Your website gets visitors, but calls, form fills, and real opportunities are too low.</p>
+
+            <p>
+              Your website gets visitors, but calls, form fills, and real
+              opportunities are too low.
+            </p>
           </article>
 
           <article class="contact-box">
             <strong>Ads</strong>
             <h3>Google Ads feel expensive.</h3>
-            <p>You are paying for clicks, but the return, tracking, or lead quality is unclear.</p>
+
+            <p>
+              You are paying for clicks, but the return, tracking, or lead
+              quality is unclear.
+            </p>
           </article>
 
           <article class="contact-box">
             <strong>SEO</strong>
             <h3>Search visibility is weak.</h3>
-            <p>You want better rankings, stronger local visibility, and pages that bring in real buyers.</p>
+
+            <p>
+              You want better rankings, stronger local visibility, and pages
+              that bring in real buyers.
+            </p>
           </article>
 
           <article class="contact-box">
             <strong>Tracking</strong>
             <h3>The numbers do not make sense.</h3>
-            <p>GA4, forms, calls, revenue, and reports are not telling one clear story.</p>
+
+            <p>
+              GA4, forms, calls, revenue, and reports are not telling one
+              clear story.
+            </p>
           </article>
 
           <article class="contact-box">
             <strong>Website</strong>
             <h3>The page needs more pop.</h3>
-            <p>Your site needs stronger hierarchy, spacing, copy, trust, and a clearer conversion path.</p>
+
+            <p>
+              Your site needs stronger hierarchy, spacing, copy, trust, and
+              a clearer conversion path.
+            </p>
           </article>
 
           <article class="contact-box">
             <strong>Strategy</strong>
             <h3>You need a second opinion.</h3>
-            <p>You want someone to look at the full system and tell you what matters most.</p>
+
+            <p>
+              You want someone to look at the full system and tell you what
+              matters most.
+            </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="contact-section alt">
       <div class="container">
+
         <div class="contact-head">
           <h2>What happens after you reach out?</h2>
+
           <p>
             Simple, practical, and focused on clarity.
           </p>
         </div>
 
         <div class="steps">
+
           <article class="step-box">
             <span>1</span>
             <h3>We review your message</h3>
-            <p>We look at your website, concern, and what you are trying to improve.</p>
+
+            <p>
+              We look at your website, concern, and what you are trying to
+              improve.
+            </p>
           </article>
 
           <article class="step-box">
             <span>2</span>
             <h3>We identify the right path</h3>
-            <p>Some businesses need a Growth Review. Others need a specific project conversation.</p>
+
+            <p>
+              Some businesses need a Growth Review. Others need a specific
+              project conversation.
+            </p>
           </article>
 
           <article class="step-box">
             <span>3</span>
             <h3>We focus the conversation</h3>
-            <p>No generic pitch. We start with the clearest problem and the strongest next step.</p>
+
+            <p>
+              No generic pitch. We start with the clearest problem and the
+              strongest next step.
+            </p>
           </article>
 
           <article class="step-box">
             <span>4</span>
             <h3>You get direction</h3>
-            <p>You leave knowing what should happen next, whether we work together or not.</p>
+
+            <p>
+              You leave knowing what should happen next, whether we work
+              together or not.
+            </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="contact-form-section" id="contact-form">
       <div class="container contact-form-wrap">
+
         <div class="contact-form-intro">
           <p class="eyebrow">Send a Message</p>
+
           <h2>Tell us what you are trying to improve.</h2>
+
           <p>
-            Share your website, what feels broken, and what success would look like. We will point you toward the best next step.
+            Share your website, what feels broken, and what success would
+            look like. We will point you toward the best next step.
           </p>
 
           <ul class="bullets">
@@ -528,7 +701,10 @@
 
         <div class="contact-form-card">
           <h2>Contact Global Concepts Media</h2>
-          <p>This form sends your message directly to our inbox.</p>
+
+          <p>
+            This form sends your message directly to our inbox.
+          </p>
 
           <form
             id="contactForm"
@@ -537,51 +713,95 @@
             method="POST"
             novalidate
           >
-            <input type="hidden" name="_subject" value="Contact Request — GlobalConceptsMedia.com" />
+            <input
+              type="hidden"
+              name="_subject"
+              value="Contact Request — GlobalConceptsMedia.com"
+            />
 
-            <div style="position:absolute; left:-9999px;" aria-hidden="true">
-              <input type="text" name="company" tabindex="-1" autocomplete="off" />
+            <div
+              style="position:absolute; left:-9999px;"
+              aria-hidden="true"
+            >
+              <input
+                type="text"
+                name="company"
+                tabindex="-1"
+                autocomplete="off"
+              />
             </div>
 
             <label>
               <span>Name</span>
-              <input name="name" type="text" required />
+              <input
+                name="name"
+                type="text"
+                required
+              />
             </label>
 
             <label>
               <span>Email</span>
-              <input name="email" type="email" required />
+              <input
+                name="email"
+                type="email"
+                required
+              />
             </label>
 
             <label>
               <span>Website</span>
-              <input name="website" type="url" placeholder="https://example.com" />
+              <input
+                name="website"
+                type="url"
+                placeholder="https://example.com"
+              />
             </label>
 
             <label>
               <span>What do you need help with?</span>
+
               <select name="topic">
                 <option value="">Select one</option>
                 <option value="Growth Review">Growth Review</option>
                 <option value="SEO">SEO</option>
                 <option value="Google Ads">Google Ads</option>
-                <option value="Analytics / Tracking">Analytics / Tracking</option>
-                <option value="Website / Conversion">Website / Conversion</option>
-                <option value="Existing Client Support">Existing Client Support</option>
+                <option value="Analytics / Tracking">
+                  Analytics / Tracking
+                </option>
+                <option value="Website / Conversion">
+                  Website / Conversion
+                </option>
+                <option value="Existing Client Support">
+                  Existing Client Support
+                </option>
                 <option value="Other">Other</option>
               </select>
             </label>
 
             <label>
               <span>Message</span>
-              <textarea name="message" rows="6" required placeholder="Tell us what is going on and what you are trying to improve."></textarea>
+
+              <textarea
+                name="message"
+                rows="6"
+                required
+                placeholder="Tell us what is going on and what you are trying to improve."
+              ></textarea>
             </label>
 
-            <button class="btn btn-primary" id="submitBtn" type="submit">
+            <button
+              class="btn btn-primary"
+              id="submitBtn"
+              type="submit"
+            >
               Send Message
             </button>
 
-            <p class="muted tiny" id="formNote"></p>
+            <p
+              class="muted tiny"
+              id="formNote"
+            ></p>
           </form>
         </div>
       </div>
@@ -589,11 +809,22 @@
 
     <section class="contact-final">
       <div class="container">
-        <h2>Find the leak. Fix the leak. Prove the growth.</h2>
+
+        <h2>
+          Find the leak. Fix the leak. Prove the growth.
+        </h2>
+
         <p>
-          Start the conversation and get a clearer picture of what your marketing should do next.
+          Start the conversation and get a clearer picture of what your
+          marketing should do next.
         </p>
-        <a class="btn btn-primary" href="#contact-form">Contact Global Concepts Media</a>
+
+        <a
+          class="btn btn-primary"
+          href="#contact-form"
+        >
+          Contact Global Concepts Media
+        </a>
       </div>
     </section>
 
@@ -601,9 +832,114 @@
 
   <div id="site-footer"></div>
 
-  <!-- Cloudflare Insights -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'>
+  <!-- =======================================================
+       Cloudflare Insights
+       Preserved from current production page.
+       ======================================================= -->
+
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'
+  ></script>
+
+  <!-- =======================================================
+       Deferred GA4 loader
+       Version: 1.0.0
+
+       GA loads:
+         - immediately after meaningful user interaction, OR
+         - automatically 7 seconds after window load.
+       ======================================================= -->
+
+  <script>
+    (function () {
+      "use strict";
+
+      const GA_MEASUREMENT_ID =
+        "G-SS32Y6EEDM";
+
+      const ANALYTICS_DELAY_MS =
+        7000;
+
+      let analyticsLoaded =
+        false;
+
+      function loadAnalytics() {
+        if (analyticsLoaded) {
+          return;
+        }
+
+        analyticsLoaded =
+          true;
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        script.async =
+          true;
+
+        script.src =
+          "https://www.googletagmanager.com/gtag/js?id=" +
+          encodeURIComponent(
+            GA_MEASUREMENT_ID
+          );
+
+        document.head.appendChild(
+          script
+        );
+
+        removeInteractionListeners();
+      }
+
+      const interactionEvents = [
+        "pointerdown",
+        "keydown",
+        "touchstart",
+        "scroll"
+      ];
+
+      function removeInteractionListeners() {
+        interactionEvents.forEach(
+          function (eventName) {
+            window.removeEventListener(
+              eventName,
+              loadAnalytics,
+              false
+            );
+          }
+        );
+      }
+
+      interactionEvents.forEach(
+        function (eventName) {
+          window.addEventListener(
+            eventName,
+            loadAnalytics,
+            {
+              once: true,
+              passive: true
+            }
+          );
+        }
+      );
+
+      window.addEventListener(
+        "load",
+        function () {
+          window.setTimeout(
+            loadAnalytics,
+            ANALYTICS_DELAY_MS
+          );
+        },
+        {
+          once: true
+        }
+      );
+    })();
   </script>
+
 </body>
 </html>
