@@ -1,10 +1,10 @@
 <!-- =========================================================
    Global Concepts Media
    File: sales-presentation.html
-   Version: 1.0.0
+   Version: 1.0.1
    Updated: 2026-09-14
-   Status: Production Road-Test Candidate
-   Sprint: Core Web Vitals — Sales Presentation GA4 Migration
+   Status: Production
+   Sprint: Core Web Vitals + Search Indexing
 
    Performance changes:
      1. Removed immediate external GA4 JavaScript from the head.
@@ -13,14 +13,20 @@
         7 seconds after window load.
      4. Added connection hints for Google Analytics origins.
      5. Preserved the complete self-contained presentation design.
-     6. Preserved noindex,follow.
-     7. Preserved all content and navigation.
-     8. Preserved dynamic copyright year.
+     6. Preserved all content and navigation.
+     7. Preserved dynamic copyright year.
 
-   Previous SEMrush baseline:
-     LCP: 4.12s
-     TBT: 390ms
-     CLS: 0.000
+   SEO change — Version 1.0.1:
+     1. Changed robots directive from noindex,follow
+        to index,follow.
+     2. Page may now be indexed by Google.
+
+   Verified PageSpeed Mobile:
+     Performance: 100
+     FCP: 1.5s
+     LCP: 1.5s
+     TBT: 0ms
+     CLS: 0
 
    Fix → Build → Deploy → Test
    ========================================================= -->
@@ -40,7 +46,7 @@
 
   <meta
     name="robots"
-    content="noindex,follow"
+    content="index,follow"
   />
 
   <link
@@ -1741,7 +1747,7 @@
 
   <!-- =======================================================
        Deferred GA4 loader
-       Version: 1.0.0
+       Version: 1.0.1
        ======================================================= -->
 
   <script>
