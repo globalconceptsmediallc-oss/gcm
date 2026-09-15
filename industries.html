@@ -1,29 +1,107 @@
+<!-- =========================================================
+   Global Concepts Media
+   File: industries.html
+   Version: 1.0.0
+   Updated: 2026-09-14
+   Status: Production Road-Test Candidate
+   Sprint: Core Web Vitals — Industries GA4 Migration
+
+   Performance changes:
+     1. Removed immediate external GA4 JavaScript from the head.
+     2. Migrated GA4 from G-0SN72D1GNG to G-SS32Y6EEDM.
+     3. Delayed Google Analytics until first interaction or
+        7 seconds after window load.
+     4. Added connection hints for Google Analytics origins.
+     5. Preserved styles.css.
+     6. Preserved shared.js.
+     7. Preserved Cloudflare Insights.
+     8. Preserved all Industries page content.
+     9. Uses the shared responsive header reservation.
+
+   Fix → Build → Deploy → Test
+   ========================================================= -->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Global Concepts Media helps service businesses, ecommerce brands, safe companies, contractors, and multi-location businesses find marketing leaks, improve tracking, strengthen SEO, and convert more leads." />
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SN72D1GNG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0SN72D1GNG', { anonymize_ip: true });
-  </script>
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+
+  <meta
+    name="description"
+    content="Global Concepts Media helps service businesses, ecommerce brands, safe companies, contractors, and multi-location businesses find marketing leaks, improve tracking, strengthen SEO, and convert more leads."
+  />
 
   <title>Industries We Help | Global Concepts Media</title>
 
-  <link rel="canonical" href="https://globalconceptsmedia.com/industries" />
-  <link rel="icon" href="./images/logo.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=20260812-1" />
-  <script defer src="./shared.js?v=20260812-1"></script>
+  <link
+    rel="canonical"
+    href="https://globalconceptsmedia.com/industries"
+  />
+
+  <link
+    rel="icon"
+    href="./images/logo.jpg"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://www.googletagmanager.com"
+    crossorigin
+  />
+
+  <link
+    rel="preconnect"
+    href="https://www.google-analytics.com"
+    crossorigin
+  />
+
+  <link
+    rel="dns-prefetch"
+    href="//www.googletagmanager.com"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./styles.css?v=20260914-1"
+  />
+
+  <script
+    defer
+    src="./shared.js?v=20260812-1"
+  ></script>
+
+  <!-- GA4 lightweight bootstrap -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag(
+      "config",
+      "G-SS32Y6EEDM",
+      {
+        anonymize_ip: true
+      }
+    );
+  </script>
 </head>
 
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a
+    class="skip-link"
+    href="#main"
+  >
+    Skip to content
+  </a>
 
   <div id="site-header"></div>
 
@@ -31,191 +109,409 @@
 
     <section class="page-hero">
       <div class="container">
-        <p class="eyebrow">Industries We Help</p>
+
+        <p class="eyebrow">
+          Industries We Help
+        </p>
 
         <h1>
           Marketing systems for businesses where missed leads are expensive.
         </h1>
 
         <p class="subhead">
-          We help businesses that depend on search visibility, clean tracking, strong pages, and clear proof of work.
-          If traffic, leads, calls, forms, products, or reporting are unclear, we help find the leak and fix the system.
+          We help businesses that depend on search visibility, clean tracking,
+          strong pages, and clear proof of work. If traffic, leads, calls,
+          forms, products, or reporting are unclear, we help find the leak
+          and fix the system.
         </p>
 
         <div class="cta-row">
-          <a class="btn btn-primary" href="./growth-review.html">Schedule a Growth Review</a>
-          <a class="btn btn-ghost" href="./case-studies.html">See Proof of Work</a>
+
+          <a
+            class="btn btn-primary"
+            href="./growth-review.html"
+          >
+            Schedule a Growth Review
+          </a>
+
+          <a
+            class="btn btn-ghost"
+            href="./case-studies.html"
+          >
+            See Proof of Work
+          </a>
+
         </div>
       </div>
     </section>
 
     <section class="section section-tight">
       <div class="container">
+
         <div class="section-head">
-          <p class="eyebrow">Who we serve</p>
-          <h2>Built for businesses that need visibility to turn into revenue.</h2>
-          <p class="muted">
-            Our best-fit clients are not looking for generic marketing activity.
-            They need systems that connect SEO, Google Ads, analytics, website structure, and conversion paths.
+
+          <p class="eyebrow">
+            Who we serve
           </p>
+
+          <h2>
+            Built for businesses that need visibility to turn into revenue.
+          </h2>
+
+          <p class="muted">
+            Our best-fit clients are not looking for generic marketing
+            activity. They need systems that connect SEO, Google Ads,
+            analytics, website structure, and conversion paths.
+          </p>
+
         </div>
 
         <div class="grid-3">
+
           <article class="card feature">
-            <p class="eyebrow">Security + Safes</p>
-            <h3>Safe companies and security dealers</h3>
-            <p class="muted">
-              We understand high-ticket safe sales, local showroom traffic, delivery questions,
-              product visibility, Google Merchant Center issues, and buyer education content.
+
+            <p class="eyebrow">
+              Security + Safes
             </p>
-            <div class="result-line">Focus: product visibility, local SEO, tracking, and conversion clarity.</div>
+
+            <h3>
+              Safe companies and security dealers
+            </h3>
+
+            <p class="muted">
+              We understand high-ticket safe sales, local showroom traffic,
+              delivery questions, product visibility, Google Merchant Center
+              issues, and buyer education content.
+            </p>
+
+            <div class="result-line">
+              Focus: product visibility, local SEO, tracking, and conversion clarity.
+            </div>
+
           </article>
 
           <article class="card feature">
-            <p class="eyebrow">Local Service</p>
-            <h3>Locksmiths, movers, contractors, and trades</h3>
-            <p class="muted">
-              Local service businesses need strong service pages, service-area structure,
-              call tracking, local search visibility, and pages built to turn urgency into action.
+
+            <p class="eyebrow">
+              Local Service
             </p>
-            <div class="result-line">Focus: calls, local rankings, lead quality, and service-area growth.</div>
+
+            <h3>
+              Locksmiths, movers, contractors, and trades
+            </h3>
+
+            <p class="muted">
+              Local service businesses need strong service pages,
+              service-area structure, call tracking, local search visibility,
+              and pages built to turn urgency into action.
+            </p>
+
+            <div class="result-line">
+              Focus: calls, local rankings, lead quality, and service-area growth.
+            </div>
+
           </article>
 
           <article class="card feature">
-            <p class="eyebrow">Ecommerce</p>
-            <h3>Shopify and product-based businesses</h3>
-            <p class="muted">
-              Ecommerce growth depends on clean product feeds, crawlable pages, category structure,
-              product descriptions, conversion tracking, and reliable shopping visibility.
+
+            <p class="eyebrow">
+              Ecommerce
             </p>
-            <div class="result-line">Focus: product discovery, feed health, SEO, and revenue tracking.</div>
+
+            <h3>
+              Shopify and product-based businesses
+            </h3>
+
+            <p class="muted">
+              Ecommerce growth depends on clean product feeds, crawlable pages,
+              category structure, product descriptions, conversion tracking,
+              and reliable shopping visibility.
+            </p>
+
+            <div class="result-line">
+              Focus: product discovery, feed health, SEO, and revenue tracking.
+            </div>
+
           </article>
 
           <article class="card feature">
-            <p class="eyebrow">Multi-Location</p>
-            <h3>Businesses serving multiple markets</h3>
-            <p class="muted">
-              Multi-location businesses need clear city pages, internal links, location signals,
-              proof content, and reporting that separates one market from another.
+
+            <p class="eyebrow">
+              Multi-Location
             </p>
-            <div class="result-line">Focus: scalable architecture, local visibility, and market clarity.</div>
+
+            <h3>
+              Businesses serving multiple markets
+            </h3>
+
+            <p class="muted">
+              Multi-location businesses need clear city pages, internal links,
+              location signals, proof content, and reporting that separates
+              one market from another.
+            </p>
+
+            <div class="result-line">
+              Focus: scalable architecture, local visibility, and market clarity.
+            </div>
+
           </article>
 
           <article class="card feature">
-            <p class="eyebrow">Professional Services</p>
-            <h3>Experts who sell trust before price</h3>
-            <p class="muted">
-              Consultants, service providers, and professional brands need credibility,
-              proof, clear offers, case studies, and pages that explain why the next step matters.
+
+            <p class="eyebrow">
+              Professional Services
             </p>
-            <div class="result-line">Focus: trust, positioning, authority, and conversion paths.</div>
+
+            <h3>
+              Experts who sell trust before price
+            </h3>
+
+            <p class="muted">
+              Consultants, service providers, and professional brands need
+              credibility, proof, clear offers, case studies, and pages that
+              explain why the next step matters.
+            </p>
+
+            <div class="result-line">
+              Focus: trust, positioning, authority, and conversion paths.
+            </div>
+
           </article>
 
           <article class="card feature">
-            <p class="eyebrow">Growth-Blocked</p>
-            <h3>Businesses that know something is leaking</h3>
-            <p class="muted">
-              Some companies do not fit neatly into one category.
-              If traffic, leads, ads, analytics, or sales data feel unclear, the first step is finding the leak.
+
+            <p class="eyebrow">
+              Growth-Blocked
             </p>
-            <div class="result-line">Focus: diagnosis, prioritization, and proof-based next steps.</div>
+
+            <h3>
+              Businesses that know something is leaking
+            </h3>
+
+            <p class="muted">
+              Some companies do not fit neatly into one category. If traffic,
+              leads, ads, analytics, or sales data feel unclear, the first
+              step is finding the leak.
+            </p>
+
+            <div class="result-line">
+              Focus: diagnosis, prioritization, and proof-based next steps.
+            </div>
+
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="section section-alt">
       <div class="container">
+
         <div class="section-head">
-          <p class="eyebrow">Common problems</p>
-          <h2>Different industries. Similar leaks.</h2>
-          <p class="muted">
-            The business may be different, but the growth blockers usually show up in the same places:
-            visibility, tracking, structure, trust, and conversion.
+
+          <p class="eyebrow">
+            Common problems
           </p>
+
+          <h2>
+            Different industries. Similar leaks.
+          </h2>
+
+          <p class="muted">
+            The business may be different, but the growth blockers usually
+            show up in the same places: visibility, tracking, structure,
+            trust, and conversion.
+          </p>
+
         </div>
 
         <div class="grid-3">
+
           <article class="card">
-            <h3>Search visibility is weaker than it should be.</h3>
+
+            <h3>
+              Search visibility is weaker than it should be.
+            </h3>
+
             <p class="muted">
-              Important service, product, city, or authority pages may not be built clearly enough
-              for search engines or customers.
+              Important service, product, city, or authority pages may not
+              be built clearly enough for search engines or customers.
             </p>
+
           </article>
 
           <article class="card">
-            <h3>Traffic is coming in, but leads are unclear.</h3>
+
+            <h3>
+              Traffic is coming in, but leads are unclear.
+            </h3>
+
             <p class="muted">
-              Calls, forms, purchases, and qualified actions may not be tracked or connected to the right source.
+              Calls, forms, purchases, and qualified actions may not be
+              tracked or connected to the right source.
             </p>
+
           </article>
 
           <article class="card">
-            <h3>Google Ads are spending without enough proof.</h3>
+
+            <h3>
+              Google Ads are spending without enough proof.
+            </h3>
+
             <p class="muted">
-              Campaigns can look active while conversion tracking, landing pages, and lead quality remain weak.
+              Campaigns can look active while conversion tracking, landing
+              pages, and lead quality remain weak.
             </p>
+
           </article>
 
           <article class="card">
-            <h3>The website explains, but does not convert.</h3>
+
+            <h3>
+              The website explains, but does not convert.
+            </h3>
+
             <p class="muted">
-              Pages need stronger hierarchy, better trust signals, clearer calls to action, and fewer dead ends.
+              Pages need stronger hierarchy, better trust signals, clearer
+              calls to action, and fewer dead ends.
             </p>
+
           </article>
 
           <article class="card">
-            <h3>Reports show numbers, not decisions.</h3>
+
+            <h3>
+              Reports show numbers, not decisions.
+            </h3>
+
             <p class="muted">
-              Business owners need to know what changed, what matters, what is leaking, and what to fix next.
+              Business owners need to know what changed, what matters,
+              what is leaking, and what to fix next.
             </p>
+
           </article>
 
           <article class="card">
-            <h3>Old technical debt is slowing growth.</h3>
+
+            <h3>
+              Old technical debt is slowing growth.
+            </h3>
+
             <p class="muted">
-              Broken links, weak canonicals, crawl waste, outdated pages, tracking gaps, and inconsistent systems add up.
+              Broken links, weak canonicals, crawl waste, outdated pages,
+              tracking gaps, and inconsistent systems add up.
             </p>
+
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="section section-tight">
       <div class="container">
+
         <div class="section-head center">
-          <p class="eyebrow">How we help</p>
-          <h2>We connect the pieces that usually get managed separately.</h2>
+
+          <p class="eyebrow">
+            How we help
+          </p>
+
+          <h2>
+            We connect the pieces that usually get managed separately.
+          </h2>
+
         </div>
 
         <div class="tool-grid">
-          <a class="tool-pill" href="./seo.html">SEO Strategy</a>
-          <a class="tool-pill" href="./google-ads.html">Google Ads</a>
-          <a class="tool-pill" href="./case-studies.html">Proof of Work</a>
-          <a class="tool-pill" href="./growth-review.html">Growth Review</a>
-          <a class="tool-pill" href="./contact.html">Tracking Review</a>
-          <a class="tool-pill" href="./contact.html">Conversion Review</a>
+
+          <a
+            class="tool-pill"
+            href="./seo.html"
+          >
+            SEO Strategy
+          </a>
+
+          <a
+            class="tool-pill"
+            href="./google-ads.html"
+          >
+            Google Ads
+          </a>
+
+          <a
+            class="tool-pill"
+            href="./case-studies.html"
+          >
+            Proof of Work
+          </a>
+
+          <a
+            class="tool-pill"
+            href="./growth-review.html"
+          >
+            Growth Review
+          </a>
+
+          <a
+            class="tool-pill"
+            href="./contact.html"
+          >
+            Tracking Review
+          </a>
+
+          <a
+            class="tool-pill"
+            href="./contact.html"
+          >
+            Conversion Review
+          </a>
+
         </div>
       </div>
     </section>
 
     <section class="section section-alt">
       <div class="container">
+
         <div class="split">
+
           <div>
-            <p class="eyebrow">Best starting point</p>
-            <h2>Not sure which leak matters most?</h2>
-            <p class="muted">
-              That is exactly why we built the Growth Review.
-              We look at the website, SEO, Google Ads, analytics, tracking, and conversion path together
-              so the next move is based on evidence, not guessing.
+
+            <p class="eyebrow">
+              Best starting point
             </p>
+
+            <h2>
+              Not sure which leak matters most?
+            </h2>
+
+            <p class="muted">
+              That is exactly why we built the Growth Review. We look at
+              the website, SEO, Google Ads, analytics, tracking, and
+              conversion path together so the next move is based on
+              evidence, not guessing.
+            </p>
+
           </div>
 
           <div class="split-cta">
-            <a class="btn btn-primary" href="./growth-review.html">Schedule a Growth Review</a>
-            <a class="btn btn-ghost" href="./contact.html">Contact GCM</a>
+
+            <a
+              class="btn btn-primary"
+              href="./growth-review.html"
+            >
+              Schedule a Growth Review
+            </a>
+
+            <a
+              class="btn btn-ghost"
+              href="./contact.html"
+            >
+              Contact GCM
+            </a>
+
           </div>
         </div>
       </div>
@@ -226,8 +522,103 @@
   <div id="site-footer"></div>
 
   <!-- Cloudflare Insights -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'>
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'
+  ></script>
+
+  <!-- =======================================================
+       Deferred GA4 loader
+       Version: 1.0.0
+       ======================================================= -->
+
+  <script>
+    (function () {
+      "use strict";
+
+      const GA_MEASUREMENT_ID =
+        "G-SS32Y6EEDM";
+
+      const ANALYTICS_DELAY_MS =
+        7000;
+
+      let analyticsLoaded =
+        false;
+
+      function loadAnalytics() {
+        if (analyticsLoaded) {
+          return;
+        }
+
+        analyticsLoaded =
+          true;
+
+        const script =
+          document.createElement("script");
+
+        script.async =
+          true;
+
+        script.src =
+          "https://www.googletagmanager.com/gtag/js?id=" +
+          encodeURIComponent(
+            GA_MEASUREMENT_ID
+          );
+
+        document.head.appendChild(
+          script
+        );
+
+        removeInteractionListeners();
+      }
+
+      const interactionEvents = [
+        "pointerdown",
+        "keydown",
+        "touchstart",
+        "scroll"
+      ];
+
+      function removeInteractionListeners() {
+        interactionEvents.forEach(
+          function (eventName) {
+            window.removeEventListener(
+              eventName,
+              loadAnalytics,
+              false
+            );
+          }
+        );
+      }
+
+      interactionEvents.forEach(
+        function (eventName) {
+          window.addEventListener(
+            eventName,
+            loadAnalytics,
+            {
+              once:true,
+              passive:true
+            }
+          );
+        }
+      );
+
+      window.addEventListener(
+        "load",
+        function () {
+          window.setTimeout(
+            loadAnalytics,
+            ANALYTICS_DELAY_MS
+          );
+        },
+        {
+          once:true
+        }
+      );
+    })();
   </script>
+
 </body>
 </html>
