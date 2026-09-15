@@ -1,25 +1,93 @@
+<!-- =========================================================
+   Global Concepts Media
+   File: seo.html
+   Version: 1.0.0
+   Updated: 2026-09-14
+   Status: Production Road-Test Candidate
+   Sprint: Core Web Vitals — SEO GA4 Migration
+
+   Performance changes:
+     1. Removed immediate external GA4 JavaScript from the head.
+     2. Migrated GA4 from G-0SN72D1GNG to G-SS32Y6EEDM.
+     3. Delayed Google Analytics until first interaction or
+        7 seconds after window load.
+     4. Added connection hints for Google Analytics origins.
+     5. Preserved styles.css and shared.js.
+     6. Preserved Cloudflare Insights.
+     7. Preserved all SEO page content.
+
+   Previous baseline:
+     TBT: approximately 516ms
+     CLS: approximately 0.304
+
+   Fix → Build → Deploy → Test
+   ========================================================= -->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="SEO should generate business, not just reports. Global Concepts Media finds the traffic leaks, fixes what matters, and proves what changed." />
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SN72D1GNG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0SN72D1GNG', { anonymize_ip: true });
-  </script>
+  <meta
+    name="description"
+    content="SEO should generate business, not just reports. Global Concepts Media finds the traffic leaks, fixes what matters, and proves what changed."
+  />
 
   <title>SEO That Finds the Leak | Global Concepts Media</title>
-  <link rel="canonical" href="https://globalconceptsmedia.com/seo" />
+
+  <link
+    rel="canonical"
+    href="https://globalconceptsmedia.com/seo"
+  />
 
   <link rel="icon" href="./images/logo.jpg" />
- <link rel="stylesheet" href="./styles.css?v=20260812-1" />
-<script defer src="./shared.js?v=20260812-1"></script>
+
+  <link
+    rel="preconnect"
+    href="https://www.googletagmanager.com"
+    crossorigin
+  />
+
+  <link
+    rel="preconnect"
+    href="https://www.google-analytics.com"
+    crossorigin
+  />
+
+  <link
+    rel="dns-prefetch"
+    href="//www.googletagmanager.com"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./styles.css?v=20260812-1"
+  />
+
+  <script
+    defer
+    src="./shared.js?v=20260812-1"
+  ></script>
+
+  <!-- GA4 lightweight bootstrap -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag(
+      "config",
+      "G-SS32Y6EEDM",
+      {
+        anonymize_ip: true
+      }
+    );
+  </script>
 </head>
 
 <body>
@@ -28,25 +96,36 @@
   <div id="site-header"></div>
 
   <main id="main">
+
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">SEO without the mystery</p>
 
-        <h1>SEO should generate business. Not just <span class="grad">reports</span>.</h1>
+        <h1>
+          SEO should generate business. Not just
+          <span class="grad">reports</span>.
+        </h1>
 
         <p class="subhead">
-          Most SEO agencies focus on rankings, traffic, and activity. We focus on finding the traffic leaks
-          that prevent your website from generating more calls, leads, and sales.
+          Most SEO agencies focus on rankings, traffic, and activity.
+          We focus on finding the traffic leaks that prevent your website
+          from generating more calls, leads, and sales.
         </p>
 
         <p class="subhead">
-          Whether the problem is technical, structural, content-related, local, or hidden in the data,
-          our job is simple: find it, fix it, and prove what changed.
+          Whether the problem is technical, structural, content-related,
+          local, or hidden in the data, our job is simple: find it, fix it,
+          and prove what changed.
         </p>
 
         <div class="cta-row">
-          <a class="btn btn-primary" href="./contact.html">Book a Growth Review</a>
-          <a class="btn btn-ghost" href="./case-studies.html">See proof of work</a>
+          <a class="btn btn-primary" href="./contact.html">
+            Book a Growth Review
+          </a>
+
+          <a class="btn btn-ghost" href="./case-studies.html">
+            See proof of work
+          </a>
         </div>
       </div>
     </section>
@@ -55,42 +134,66 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Common leaks we find</p>
-          <h2>The problem is usually not “more SEO.” It is finding what is blocking growth.</h2>
+
+          <h2>
+            The problem is usually not “more SEO.” It is finding what is
+            blocking growth.
+          </h2>
+
           <p class="muted">
-            Before adding more pages, more keywords, or more reports, we look for the places where search visibility,
-            trust, and conversions are breaking down.
+            Before adding more pages, more keywords, or more reports, we
+            look for the places where search visibility, trust, and
+            conversions are breaking down.
           </p>
         </div>
 
         <div class="grid-3">
           <article class="card">
             <h3>Broken tracking</h3>
-            <p class="muted">Calls, forms, ecommerce events, or lead sources are missing, duplicated, or not tied back to business outcomes.</p>
+            <p class="muted">
+              Calls, forms, ecommerce events, or lead sources are missing,
+              duplicated, or not tied back to business outcomes.
+            </p>
           </article>
 
           <article class="card">
             <h3>Wrong pages ranking</h3>
-            <p class="muted">The pages showing up in search are not always the pages most likely to turn visitors into customers.</p>
+            <p class="muted">
+              The pages showing up in search are not always the pages most
+              likely to turn visitors into customers.
+            </p>
           </article>
 
           <article class="card">
             <h3>Thin service pages</h3>
-            <p class="muted">Important services are often buried, too generic, missing local intent, or not strong enough to earn trust.</p>
+            <p class="muted">
+              Important services are often buried, too generic, missing
+              local intent, or not strong enough to earn trust.
+            </p>
           </article>
 
           <article class="card">
             <h3>Internal linking gaps</h3>
-            <p class="muted">Strong pages do not perform when the site structure fails to pass authority to the pages that matter.</p>
+            <p class="muted">
+              Strong pages do not perform when the site structure fails to
+              pass authority to the pages that matter.
+            </p>
           </article>
 
           <article class="card">
             <h3>Indexing issues</h3>
-            <p class="muted">Google may be seeing duplicates, redirects, old URLs, missing canonicals, or pages that should not compete.</p>
+            <p class="muted">
+              Google may be seeing duplicates, redirects, old URLs,
+              missing canonicals, or pages that should not compete.
+            </p>
           </article>
 
           <article class="card">
             <h3>Conversion bottlenecks</h3>
-            <p class="muted">Traffic is not enough if the page does not create trust, urgency, clarity, or a strong next step.</p>
+            <p class="muted">
+              Traffic is not enough if the page does not create trust,
+              urgency, clarity, or a strong next step.
+            </p>
           </article>
         </div>
       </div>
@@ -100,15 +203,21 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Why most SEO fails</p>
+
           <h2>Activity is not the same as growth.</h2>
+
           <p class="muted">
-            Most businesses receive SEO reports showing rankings, clicks, traffic, and impressions.
-            But the report never answers the question that matters most:
+            Most businesses receive SEO reports showing rankings, clicks,
+            traffic, and impressions. But the report never answers the
+            question that matters most:
           </p>
+
           <h2>Did the business actually grow?</h2>
+
           <p class="muted">
-            More traffic means very little if visitors never become calls, form fills, customers,
-            booked jobs, store visits, or revenue. That is why we start with the leak before adding more activity.
+            More traffic means very little if visitors never become calls,
+            form fills, customers, booked jobs, store visits, or revenue.
+            That is why we start with the leak before adding more activity.
           </p>
         </div>
       </div>
@@ -118,15 +227,21 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">The GCM method</p>
-          <h2>Find the leak. Fix the leak. Prove what changed.</h2>
+
+          <h2>
+            Find the leak. Fix the leak. Prove what changed.
+          </h2>
+
           <p class="muted">
             We build SEO like a growth system, not a checklist.
           </p>
         </div>
 
         <div class="grid-3">
+
           <article class="card">
             <h3>01. Find the leak</h3>
+
             <ul class="bullets">
               <li>Search Console review</li>
               <li>GA4 visibility check</li>
@@ -139,6 +254,7 @@
 
           <article class="card">
             <h3>02. Fix what matters</h3>
+
             <ul class="bullets">
               <li>Technical cleanup</li>
               <li>Page structure improvements</li>
@@ -151,6 +267,7 @@
 
           <article class="card">
             <h3>03. Prove what changed</h3>
+
             <ul class="bullets">
               <li>Search visibility movement</li>
               <li>Organic traffic quality</li>
@@ -160,6 +277,7 @@
               <li>Revenue indicators</li>
             </ul>
           </article>
+
         </div>
       </div>
     </section>
@@ -168,44 +286,61 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Recent wins</p>
+
           <h2>Proof beats promises.</h2>
+
           <p class="muted">
-            These are the types of growth leaks we find and fix across real client work.
+            These are the types of growth leaks we find and fix across
+            real client work.
           </p>
         </div>
 
         <div class="grid-2">
+
           <article class="card">
             <h3>Merchant Center Recovery</h3>
+
             <p class="muted">
-              Products restored, visibility recovered, and revenue tracking brought back into focus after shopping visibility broke down.
+              Products restored, visibility recovered, and revenue
+              tracking brought back into focus after shopping visibility
+              broke down.
             </p>
           </article>
 
           <article class="card">
             <h3>Analytics Repair</h3>
+
             <p class="muted">
-              Broken tracking identified, lead attribution restored, and decision-making improved by reconnecting the data.
+              Broken tracking identified, lead attribution restored, and
+              decision-making improved by reconnecting the data.
             </p>
           </article>
 
           <article class="card">
             <h3>Technical SEO Cleanup</h3>
+
             <p class="muted">
-              Indexing issues fixed, duplicate signals removed, redirects reviewed, and site structure strengthened.
+              Indexing issues fixed, duplicate signals removed, redirects
+              reviewed, and site structure strengthened.
             </p>
           </article>
 
           <article class="card">
             <h3>Local Visibility Growth</h3>
+
             <p class="muted">
-              Service pages expanded, location authority improved, and local search visibility strengthened through better structure.
+              Service pages expanded, location authority improved, and
+              local search visibility strengthened through better
+              structure.
             </p>
           </article>
+
         </div>
 
         <div class="cta-row">
-          <a class="btn btn-ghost" href="./case-studies.html">View more proof</a>
+          <a class="btn btn-ghost" href="./case-studies.html">
+            View more proof
+          </a>
         </div>
       </div>
     </section>
@@ -214,34 +349,48 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Cost of doing nothing</p>
-          <h2>Every month the leak stays open, competitors gain ground.</h2>
+
+          <h2>
+            Every month the leak stays open, competitors gain ground.
+          </h2>
+
           <p class="muted">
-            SEO is easy to delay because the loss is often invisible. But search engines keep collecting evidence.
-            Customers keep choosing other companies. Competitors keep strengthening their pages, authority, and local signals.
+            SEO is easy to delay because the loss is often invisible. But
+            search engines keep collecting evidence. Customers keep
+            choosing other companies. Competitors keep strengthening their
+            pages, authority, and local signals.
           </p>
         </div>
 
         <div class="grid-3">
+
           <article class="card">
             <h3>Authority compounds somewhere else</h3>
+
             <p class="muted">
-              If your pages are weak, outdated, or hidden, Google has more reason to trust a competitor instead.
+              If your pages are weak, outdated, or hidden, Google has more
+              reason to trust a competitor instead.
             </p>
           </article>
 
           <article class="card">
             <h3>Good traffic keeps leaking</h3>
+
             <p class="muted">
-              Visitors may arrive, get confused, fail to trust the page, and leave without calling or filling out a form.
+              Visitors may arrive, get confused, fail to trust the page,
+              and leave without calling or filling out a form.
             </p>
           </article>
 
           <article class="card">
             <h3>Bad data creates bad decisions</h3>
+
             <p class="muted">
-              When tracking is broken, it becomes harder to know what is working, what is wasting money, and what to fix first.
+              When tracking is broken, it becomes harder to know what is
+              working, what is wasting money, and what to fix first.
             </p>
           </article>
+
         </div>
       </div>
     </section>
@@ -250,37 +399,53 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">What we actually work on</p>
-          <h2>SEO that covers the full path from search to sale.</h2>
+
+          <h2>
+            SEO that covers the full path from search to sale.
+          </h2>
         </div>
 
         <div class="grid-2">
+
           <article class="card">
             <h3>Technical SEO</h3>
+
             <p class="muted">
-              Indexing, schema, redirects, canonicals, sitemap accuracy, crawl clarity, site structure, and core technical health.
+              Indexing, schema, redirects, canonicals, sitemap accuracy,
+              crawl clarity, site structure, and core technical health.
             </p>
           </article>
 
           <article class="card">
             <h3>Local SEO</h3>
+
             <p class="muted">
-              Google Business Profile support, service-area architecture, city pages, location pages, local links, and authority signals.
+              Google Business Profile support, service-area architecture,
+              city pages, location pages, local links, and authority
+              signals.
             </p>
           </article>
 
           <article class="card">
             <h3>Content Strategy</h3>
+
             <p class="muted">
-              Service pages, buying guides, comparison content, FAQs, proof sections, trust-building content, and content refreshes.
+              Service pages, buying guides, comparison content, FAQs,
+              proof sections, trust-building content, and content
+              refreshes.
             </p>
           </article>
 
           <article class="card">
             <h3>Analytics & Measurement</h3>
+
             <p class="muted">
-              GA4, Search Console, Semrush tracking, lead tracking, conversion paths, visibility reports, and proof-of-work documentation.
+              GA4, Search Console, Semrush tracking, lead tracking,
+              conversion paths, visibility reports, and proof-of-work
+              documentation.
             </p>
           </article>
+
         </div>
       </div>
     </section>
@@ -288,17 +453,26 @@
     <section class="section section-alt">
       <div class="container">
         <div class="split">
+
           <div>
             <p class="eyebrow">Best fit</p>
-            <h2>This is built for businesses that need SEO to produce business outcomes.</h2>
+
+            <h2>
+              This is built for businesses that need SEO to produce
+              business outcomes.
+            </h2>
+
             <p class="muted">
-              We are a strong fit for local service businesses, retail businesses, ecommerce brands,
-              multi-location companies, dealers, and companies already investing in marketing but unsure where growth is leaking.
+              We are a strong fit for local service businesses, retail
+              businesses, ecommerce brands, multi-location companies,
+              dealers, and companies already investing in marketing but
+              unsure where growth is leaking.
             </p>
           </div>
 
           <div class="card">
             <h3>You may need this if:</h3>
+
             <ul class="bullets">
               <li>Your site gets traffic but not enough leads.</li>
               <li>Your rankings move but sales do not.</li>
@@ -308,6 +482,7 @@
               <li>You want SEO tied to real business movement.</li>
             </ul>
           </div>
+
         </div>
       </div>
     </section>
@@ -315,17 +490,24 @@
     <section class="section">
       <div class="container">
         <div class="split">
+
           <div>
             <p class="eyebrow">Let’s find the leak</p>
-            <h2>Before you spend more on marketing, find out what is preventing growth.</h2>
+
+            <h2>
+              Before you spend more on marketing, find out what is
+              preventing growth.
+            </h2>
+
             <p class="muted">
-              In a Growth Review, we look for the traffic, trust, tracking, and conversion issues
-              that may be holding your website back.
+              In a Growth Review, we look for the traffic, trust, tracking,
+              and conversion issues that may be holding your website back.
             </p>
           </div>
 
           <div class="card">
             <h3>What we look for:</h3>
+
             <ul class="bullets">
               <li>Where traffic is leaking</li>
               <li>What is limiting visibility</li>
@@ -334,19 +516,121 @@
             </ul>
 
             <div class="cta-row">
-              <a class="btn btn-primary" href="./contact.html">Book Your Growth Review</a>
-              <a class="btn btn-ghost" href="./case-studies.html">See Proof First</a>
+              <a class="btn btn-primary" href="./contact.html">
+                Book Your Growth Review
+              </a>
+
+              <a class="btn btn-ghost" href="./case-studies.html">
+                See Proof First
+              </a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
+
   </main>
 
   <div id="site-footer"></div>
 
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'>
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'
+  ></script>
+
+  <!-- =======================================================
+       Deferred GA4 loader
+       Version: 1.0.0
+       ======================================================= -->
+
+  <script>
+    (function () {
+      "use strict";
+
+      const GA_MEASUREMENT_ID =
+        "G-SS32Y6EEDM";
+
+      const ANALYTICS_DELAY_MS =
+        7000;
+
+      let analyticsLoaded =
+        false;
+
+      function loadAnalytics() {
+        if (analyticsLoaded) {
+          return;
+        }
+
+        analyticsLoaded =
+          true;
+
+        const script =
+          document.createElement("script");
+
+        script.async =
+          true;
+
+        script.src =
+          "https://www.googletagmanager.com/gtag/js?id=" +
+          encodeURIComponent(
+            GA_MEASUREMENT_ID
+          );
+
+        document.head.appendChild(
+          script
+        );
+
+        removeInteractionListeners();
+      }
+
+      const interactionEvents = [
+        "pointerdown",
+        "keydown",
+        "touchstart",
+        "scroll"
+      ];
+
+      function removeInteractionListeners() {
+        interactionEvents.forEach(
+          function (eventName) {
+            window.removeEventListener(
+              eventName,
+              loadAnalytics,
+              false
+            );
+          }
+        );
+      }
+
+      interactionEvents.forEach(
+        function (eventName) {
+          window.addEventListener(
+            eventName,
+            loadAnalytics,
+            {
+              once: true,
+              passive: true
+            }
+          );
+        }
+      );
+
+      window.addEventListener(
+        "load",
+        function () {
+          window.setTimeout(
+            loadAnalytics,
+            ANALYTICS_DELAY_MS
+          );
+        },
+        {
+          once: true
+        }
+      );
+    })();
   </script>
+
 </body>
 </html>
