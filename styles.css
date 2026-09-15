@@ -185,6 +185,9 @@ ul,ol{margin-top:0}
 }
 
 /* Header */
+#site-header{
+  min-height:var(--header-h);
+}
 .site-header{
   position:sticky;
   top:0;
