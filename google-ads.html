@@ -1,25 +1,106 @@
+<!-- =========================================================
+   Global Concepts Media
+   File: google-ads.html
+   Version: 1.0.0
+   Updated: 2026-09-14
+   Status: Production Road-Test Candidate
+   Sprint: Core Web Vitals — Google Ads GA4 Migration
+   Purpose:
+     Preserve the complete production Google Ads page while
+     migrating analytics to the clean GCM GA4 property and
+     keeping Google Analytics outside the critical rendering
+     window.
+
+   Performance changes:
+     1. Removed immediate external GA4 JavaScript from the head.
+     2. Migrated GA4 from G-0SN72D1GNG to G-SS32Y6EEDM.
+     3. Delayed Google Analytics until first interaction or
+        7 seconds after window load.
+     4. Added connection hints for Google Analytics origins.
+     5. Preserved styles.css.
+     6. Preserved shared.js.
+     7. Preserved Cloudflare Insights.
+     8. Preserved all page content and certification images.
+
+   Previous baseline:
+     TBT: approximately 642ms
+     CLS: approximately 0.304
+
+   Fix → Build → Deploy → Test
+   ========================================================= -->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Google Ads management that finds wasted spend, fixes tracking, improves campaign structure, and proves what is driving leads." />
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0SN72D1GNG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0SN72D1GNG', { anonymize_ip: true });
-  </script>
+  <meta
+    name="description"
+    content="Google Ads management that finds wasted spend, fixes tracking, improves campaign structure, and proves what is driving leads."
+  />
 
   <title>Google Ads Management | Global Concepts Media</title>
-  <link rel="canonical" href="https://globalconceptsmedia.com/google-ads" />
+
+  <link
+    rel="canonical"
+    href="https://globalconceptsmedia.com/google-ads"
+  />
 
   <link rel="icon" href="./images/logo.jpg" />
- <link rel="stylesheet" href="./styles.css?v=20260812-1" />
-<script defer src="./shared.js?v=20260812-1"></script>
+
+  <!--
+    Connection hints only.
+    Google Analytics JavaScript is intentionally delayed.
+  -->
+  <link
+    rel="preconnect"
+    href="https://www.googletagmanager.com"
+    crossorigin
+  />
+
+  <link
+    rel="preconnect"
+    href="https://www.google-analytics.com"
+    crossorigin
+  />
+
+  <link
+    rel="dns-prefetch"
+    href="//www.googletagmanager.com"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./styles.css?v=20260812-1"
+  />
+
+  <script
+    defer
+    src="./shared.js?v=20260812-1"
+  ></script>
+
+  <!-- =======================================================
+       GA4 lightweight bootstrap
+       ======================================================= -->
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+
+    gtag(
+      "config",
+      "G-SS32Y6EEDM",
+      {
+        anonymize_ip: true
+      }
+    );
+  </script>
 </head>
 
 <body>
@@ -33,21 +114,48 @@
       <div class="container">
         <p class="eyebrow">Google Ads Management</p>
 
-        <h1>Most Google Ads accounts do not need more budget. They need <span class="grad">fewer leaks.</span></h1>
+        <h1>
+          Most Google Ads accounts do not need more budget.
+          They need <span class="grad">fewer leaks.</span>
+        </h1>
 
         <p class="subhead">
-          We find where money is being wasted, fix the tracking and campaign issues causing it,
-          and prove what changed so your ad spend has a cleaner path to real leads.
+          We find where money is being wasted, fix the tracking and
+          campaign issues causing it, and prove what changed so your ad
+          spend has a cleaner path to real leads.
         </p>
 
-        <div class="cert-row" aria-label="Google Ads certifications">
-          <img class="cert" src="./images/google-ads-display-certified.png?v=20260212" alt="Google Ads Display Certification" />
-          <img class="cert" src="./images/google-ads-video-certified.png?v=20260212" alt="Google Ads Video Certification" />
+        <div
+          class="cert-row"
+          aria-label="Google Ads certifications"
+        >
+          <img
+            class="cert"
+            src="./images/google-ads-display-certified.png?v=20260212"
+            alt="Google Ads Display Certification"
+          />
+
+          <img
+            class="cert"
+            src="./images/google-ads-video-certified.png?v=20260212"
+            alt="Google Ads Video Certification"
+          />
         </div>
 
         <div class="cta-row">
-          <a class="btn btn-primary" href="./contact.html">Get My Growth Review</a>
-          <a class="btn btn-ghost" href="./case-studies.html">See What We Fixed</a>
+          <a
+            class="btn btn-primary"
+            href="./contact.html"
+          >
+            Get My Growth Review
+          </a>
+
+          <a
+            class="btn btn-ghost"
+            href="./case-studies.html"
+          >
+            See What We Fixed
+          </a>
         </div>
       </div>
     </section>
@@ -55,241 +163,351 @@
     <section class="section section-alt">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">What We Find Most Often</p>
-          <h2>The problem is usually not traffic. It is leakage.</h2>
+          <p class="eyebrow">
+            What We Find Most Often
+          </p>
+
+          <h2>
+            The problem is usually not traffic. It is leakage.
+          </h2>
+
           <p class="muted">
-            More clicks will not help if calls are not tracked, searches are too loose,
-            landing pages are weak, or reports do not show what actually drove the lead.
+            More clicks will not help if calls are not tracked, searches
+            are too loose, landing pages are weak, or reports do not show
+            what actually drove the lead.
           </p>
         </div>
 
         <div class="grid-3">
+
           <article class="card">
             <h3>Tracking is unclear</h3>
+
             <p class="muted">
-              Forms, phone calls, key events, duplicate conversions, or GA4 setup may be causing bad optimization data.
+              Forms, phone calls, key events, duplicate conversions, or
+              GA4 setup may be causing bad optimization data.
             </p>
           </article>
 
           <article class="card">
             <h3>Spend is leaking</h3>
+
             <p class="muted">
-              Broad searches, weak negatives, campaign overlap, and poor segmentation can waste budget fast.
+              Broad searches, weak negatives, campaign overlap, and poor
+              segmentation can waste budget fast.
             </p>
           </article>
 
           <article class="card">
             <h3>Reports lack answers</h3>
+
             <p class="muted">
-              You should know what changed, what improved, what still needs work, and what move comes next.
+              You should know what changed, what improved, what still
+              needs work, and what move comes next.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
+
         <div class="grid-3">
+
           <article class="card">
             <p class="eyebrow">Find the Leak</p>
             <h3>Audit the account</h3>
+
             <p class="muted">
-              We review structure, search terms, conversion actions, landing pages, budget pacing,
-              bid strategy, and reporting gaps.
+              We review structure, search terms, conversion actions,
+              landing pages, budget pacing, bid strategy, and reporting
+              gaps.
             </p>
           </article>
 
           <article class="card">
             <p class="eyebrow">Fix the Leak</p>
             <h3>Rebuild what matters</h3>
+
             <p class="muted">
-              We clean up campaign intent, negatives, targeting, conversion tracking, ad messaging,
-              and landing-page alignment.
+              We clean up campaign intent, negatives, targeting,
+              conversion tracking, ad messaging, and landing-page
+              alignment.
             </p>
           </article>
 
           <article class="card">
             <p class="eyebrow">Prove the Fix</p>
             <h3>Show the work</h3>
+
             <p class="muted">
-              We report the fixes, the performance impact, the next opportunity, and what the numbers actually mean.
+              We report the fixes, the performance impact, the next
+              opportunity, and what the numbers actually mean.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="section section-alt">
       <div class="container">
+
         <div class="section-head">
           <p class="eyebrow">Common Issues We Check</p>
-          <h2>Before you scale the budget, make sure the account is not broken underneath.</h2>
+
+          <h2>
+            Before you scale the budget, make sure the account is not
+            broken underneath.
+          </h2>
         </div>
 
         <div class="grid-3">
+
           <article class="card">
             <h3>Conversion Tracking</h3>
+
             <p class="muted">
-              Calls not counted, forms not firing, duplicate conversions, wrong primary actions,
-              missing GA4 events, or bad attribution.
+              Calls not counted, forms not firing, duplicate conversions,
+              wrong primary actions, missing GA4 events, or bad attribution.
             </p>
           </article>
 
           <article class="card">
             <h3>Campaign Structure</h3>
+
             <p class="muted">
-              Loose match types, poor segmentation, missing negatives, weak location targeting,
-              overlapping campaigns, or unclear naming.
+              Loose match types, poor segmentation, missing negatives,
+              weak location targeting, overlapping campaigns, or unclear
+              naming.
             </p>
           </article>
 
           <article class="card">
             <h3>Conversion Flow</h3>
+
             <p class="muted">
-              Weak landing pages, unclear offers, slow pages, poor mobile layout,
-              mismatched ad copy, or forms that create friction.
+              Weak landing pages, unclear offers, slow pages, poor mobile
+              layout, mismatched ad copy, or forms that create friction.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
+
         <div class="section-head">
-          <p class="eyebrow">Proof Without Name-Dropping</p>
-          <h2>Recent problems we have found and fixed</h2>
+          <p class="eyebrow">
+            Proof Without Name-Dropping
+          </p>
+
+          <h2>
+            Recent problems we have found and fixed
+          </h2>
+
           <p class="muted">
-            We focus on real marketing problems: broken tracking, wasted spend, technical issues,
-            and missed opportunities that most reports do not explain.
+            We focus on real marketing problems: broken tracking, wasted
+            spend, technical issues, and missed opportunities that most
+            reports do not explain.
           </p>
         </div>
 
         <div class="grid-3">
+
           <article class="card">
             <h3>Local service account</h3>
+
             <p class="muted">
-              Found weak conversion visibility, rebuilt lead tracking, tightened campaign intent,
-              and created clearer weekly performance reporting.
+              Found weak conversion visibility, rebuilt lead tracking,
+              tightened campaign intent, and created clearer weekly
+              performance reporting.
             </p>
           </article>
 
           <article class="card">
             <h3>Retail account</h3>
+
             <p class="muted">
-              Identified product visibility and campaign structure issues that were limiting traffic quality
-              and making performance harder to read.
+              Identified product visibility and campaign structure issues
+              that were limiting traffic quality and making performance
+              harder to read.
             </p>
           </article>
 
           <article class="card">
             <h3>Lead generation account</h3>
+
             <p class="muted">
-              Cleaned up wasted searches, improved negative keyword control,
-              and made reporting easier for non-technical decision makers.
+              Cleaned up wasted searches, improved negative keyword
+              control, and made reporting easier for non-technical
+              decision makers.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="section section-alt">
       <div class="container">
+
         <div class="section-head">
-          <p class="eyebrow">What Changes After the Fix</p>
-          <h2>You get a cleaner path from search to lead.</h2>
+          <p class="eyebrow">
+            What Changes After the Fix
+          </p>
+
+          <h2>
+            You get a cleaner path from search to lead.
+          </h2>
+
           <p class="muted">
-            Google Ads works best when the whole system is clear: the search, the ad, the page,
-            the call, the form, and the report.
+            Google Ads works best when the whole system is clear: the
+            search, the ad, the page, the call, the form, and the report.
           </p>
         </div>
 
         <ol class="steps">
+
           <li class="step card">
             <div class="step-num">01</div>
+
             <div>
               <h3>Cleaner data</h3>
+
               <p class="muted">
-                Better conversion actions help the account optimize toward real business outcomes.
+                Better conversion actions help the account optimize toward
+                real business outcomes.
               </p>
             </div>
           </li>
 
           <li class="step card">
             <div class="step-num">02</div>
+
             <div>
               <h3>Less waste</h3>
+
               <p class="muted">
-                Stronger search-term control and tighter campaign intent reduce spend on the wrong clicks.
+                Stronger search-term control and tighter campaign intent
+                reduce spend on the wrong clicks.
               </p>
             </div>
           </li>
 
           <li class="step card">
             <div class="step-num">03</div>
+
             <div>
               <h3>Better lead quality</h3>
+
               <p class="muted">
-                Ads, landing pages, and offers work together so the right people take the right action.
+                Ads, landing pages, and offers work together so the right
+                people take the right action.
               </p>
             </div>
           </li>
 
           <li class="step card">
             <div class="step-num">04</div>
+
             <div>
               <h3>Clearer decisions</h3>
+
               <p class="muted">
-                Reports show what changed, why it matters, and where the next improvement should happen.
+                Reports show what changed, why it matters, and where the
+                next improvement should happen.
               </p>
             </div>
           </li>
+
         </ol>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
+
         <div class="split">
+
           <div>
             <p class="eyebrow">Best Fit</p>
-            <h2>This is built for businesses already spending money on marketing.</h2>
+
+            <h2>
+              This is built for businesses already spending money on
+              marketing.
+            </h2>
+
             <p class="muted">
-              If you are getting clicks but not enough qualified leads, the next step is not guessing.
-              The next step is finding where the money is leaking.
+              If you are getting clicks but not enough qualified leads,
+              the next step is not guessing. The next step is finding
+              where the money is leaking.
             </p>
           </div>
 
           <div class="card">
             <h3>Good fit if you need:</h3>
+
             <p class="muted">
-              Cleaner tracking, stronger local lead flow, better campaign structure, lower waste,
-              stronger landing pages, or better proof of marketing performance.
+              Cleaner tracking, stronger local lead flow, better campaign
+              structure, lower waste, stronger landing pages, or better
+              proof of marketing performance.
             </p>
+
             <div class="cta-row">
-              <a class="btn btn-primary" href="./contact.html">Find My Leaks</a>
+              <a
+                class="btn btn-primary"
+                href="./contact.html"
+              >
+                Find My Leaks
+              </a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
     <section class="section section-alt">
       <div class="container">
+
         <div class="split">
+
           <div>
             <p class="eyebrow">Google Ads + SEO</p>
-            <h2>Paid search works better when the whole system is clean.</h2>
+
+            <h2>
+              Paid search works better when the whole system is clean.
+            </h2>
+
             <p class="muted">
-              Google Ads can expose demand fast. SEO builds durable authority. Together, they help show
-              where demand exists, what customers are searching for, and which pages deserve more investment.
+              Google Ads can expose demand fast. SEO builds durable
+              authority. Together, they help show where demand exists,
+              what customers are searching for, and which pages deserve
+              more investment.
             </p>
           </div>
 
           <div class="split-cta">
-            <a class="btn btn-primary" href="./contact.html">Book a Growth Review</a>
-            <a class="btn btn-ghost" href="./seo.html">View SEO Services</a>
+
+            <a
+              class="btn btn-primary"
+              href="./contact.html"
+            >
+              Book a Growth Review
+            </a>
+
+            <a
+              class="btn btn-ghost"
+              href="./seo.html"
+            >
+              View SEO Services
+            </a>
+
           </div>
         </div>
       </div>
@@ -297,19 +515,42 @@
 
     <section class="section">
       <div class="container">
+
         <div class="split">
+
           <div>
-            <p class="eyebrow">Before You Spend Another Dollar</p>
-            <h2>Know what is working, what is leaking, and what should be fixed first.</h2>
+            <p class="eyebrow">
+              Before You Spend Another Dollar
+            </p>
+
+            <h2>
+              Know what is working, what is leaking, and what should be
+              fixed first.
+            </h2>
+
             <p class="muted">
-              The Growth Review gives you a clear look at the account, the tracking, the landing pages,
-              and the opportunities hiding inside your marketing system.
+              The Growth Review gives you a clear look at the account,
+              the tracking, the landing pages, and the opportunities
+              hiding inside your marketing system.
             </p>
           </div>
 
           <div class="split-cta">
-            <a class="btn btn-primary" href="./contact.html">Get My Growth Review</a>
-            <a class="btn btn-ghost" href="./case-studies.html">View Case Studies</a>
+
+            <a
+              class="btn btn-primary"
+              href="./contact.html"
+            >
+              Get My Growth Review
+            </a>
+
+            <a
+              class="btn btn-ghost"
+              href="./case-studies.html"
+            >
+              View Case Studies
+            </a>
+
           </div>
         </div>
       </div>
@@ -319,8 +560,113 @@
 
   <div id="site-footer"></div>
 
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'>
+  <!-- =======================================================
+       Cloudflare Insights
+       ======================================================= -->
+
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token":"759fd166dbe248f79e559da39742e8ea"}'
+  ></script>
+
+  <!-- =======================================================
+       Deferred GA4 loader
+       Version: 1.0.0
+
+       GA loads:
+         - immediately after meaningful user interaction, OR
+         - automatically 7 seconds after window load.
+       ======================================================= -->
+
+  <script>
+    (function () {
+      "use strict";
+
+      const GA_MEASUREMENT_ID =
+        "G-SS32Y6EEDM";
+
+      const ANALYTICS_DELAY_MS =
+        7000;
+
+      let analyticsLoaded =
+        false;
+
+      function loadAnalytics() {
+        if (analyticsLoaded) {
+          return;
+        }
+
+        analyticsLoaded =
+          true;
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        script.async =
+          true;
+
+        script.src =
+          "https://www.googletagmanager.com/gtag/js?id=" +
+          encodeURIComponent(
+            GA_MEASUREMENT_ID
+          );
+
+        document.head.appendChild(
+          script
+        );
+
+        removeInteractionListeners();
+      }
+
+      const interactionEvents = [
+        "pointerdown",
+        "keydown",
+        "touchstart",
+        "scroll"
+      ];
+
+      function removeInteractionListeners() {
+        interactionEvents.forEach(
+          function (eventName) {
+            window.removeEventListener(
+              eventName,
+              loadAnalytics,
+              false
+            );
+          }
+        );
+      }
+
+      interactionEvents.forEach(
+        function (eventName) {
+          window.addEventListener(
+            eventName,
+            loadAnalytics,
+            {
+              once: true,
+              passive: true
+            }
+          );
+        }
+      );
+
+      window.addEventListener(
+        "load",
+        function () {
+          window.setTimeout(
+            loadAnalytics,
+            ANALYTICS_DELAY_MS
+          );
+        },
+        {
+          once: true
+        }
+      );
+    })();
   </script>
+
 </body>
 </html>
