@@ -1,8 +1,8 @@
 <!-- =========================================================
    Global Concepts Media
    File: sales-presentation.html
-   Version: 1.0.1
-   Updated: 2026-09-14
+   Version: 1.0.2
+   Updated: 2026-10-01
    Status: Production
    Sprint: Core Web Vitals + Search Indexing
 
@@ -15,6 +15,13 @@
      5. Preserved the complete self-contained presentation design.
      6. Preserved all content and navigation.
      7. Preserved dynamic copyright year.
+
+   Presentation spacing — Version 1.0.2:
+     1. Removes oversized first-screen vertical centering.
+     2. Moves the hero content upward beneath the navigation.
+     3. Gives the hero content more usable large-screen width.
+     4. Keeps the Marketing Leak Check visible in the first screen.
+     5. Preserves content, navigation, CTA behavior, and analytics.
 
    SEO change — Version 1.0.1:
      1. Changed robots directive from noindex,follow
@@ -238,9 +245,24 @@
     }
 
     .slide{
-      min-height:82vh;
+      min-height:auto;
       display:flex;
-      align-items:center;
+      align-items:flex-start;
+      padding-top:clamp(54px,7vh,86px);
+      padding-bottom:clamp(72px,9vh,112px);
+    }
+
+    .slide:first-of-type .hero-grid{
+      width:min(1380px,calc(100% - 36px));
+    }
+
+    .slide:first-of-type h1{
+      font-size:clamp(3.8rem,6.1vw,7.2rem);
+    }
+
+    .slide:first-of-type .scoreboard{
+      transform:scale(1.04);
+      transform-origin:center left;
     }
 
     .eyebrow{
